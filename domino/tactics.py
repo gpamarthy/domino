@@ -1,11 +1,10 @@
-import os
 from itertools import product
 from pathlib import Path
 
 import networkx as nx
 import yaml
 
-from .graph import ASSUME, IAM_ESCALATE
+from .graph import IAM_ESCALATE
 
 
 def load_tactics():
@@ -35,8 +34,7 @@ def _parse_tactic(t):
             kind = cfg.get("kind")
             contains = cfg.get("desc_contains")
             return any(
-                e["kind"] == kind and (not contains or contains in e.get("desc", ""))
-                for e in edges
+                e["kind"] == kind and (not contains or contains in e.get("desc", "")) for e in edges
             )
         if "subsequence" in match_cfg:
             needle = match_cfg["subsequence"]
