@@ -1,0 +1,187 @@
+{
+  "account_id": "445566778899",
+  "iam": {
+    "users": [],
+    "roles": [
+      {
+        "RoleName": "app-role",
+        "Arn": "arn:aws:iam::445566778899:role/app-role",
+        "RoleId": "AROAAPPROLE00000000001",
+        "CreateDate": "2026-02-20T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "app-deploy-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "LambdaDeploy",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:UpdateFunctionCode",
+                    "lambda:GetFunction",
+                    "lambda:ListFunctions"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "Logging",
+                  "Effect": "Allow",
+                  "Action": ["logs:PutLogEvents", "logs:CreateLogStream"],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "app-instance-profile",
+            "InstanceProfileId": "AIPAAPPPROFILE00000001",
+            "Arn": "arn:aws:iam::445566778899:instance-profile/app-instance-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "app-role",
+                "Arn": "arn:aws:iam::445566778899:role/app-role"
+              }
+            ],
+            "CreateDate": "2026-02-20T10:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "admin-exec-role",
+        "Arn": "arn:aws:iam::445566778899:role/admin-exec-role",
+        "RoleId": "AROAADMINEXEC000000001",
+        "CreateDate": "2026-02-20T10:05:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "monitoring-role",
+        "Arn": "arn:aws:iam::445566778899:role/monitoring-role",
+        "RoleId": "AROAMONITORING00000001",
+        "CreateDate": "2026-02-20T10:10:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "cw-readonly",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "CWRead",
+                  "Effect": "Allow",
+                  "Action": ["cloudwatch:Get*", "cloudwatch:List*", "cloudwatch:Describe*"],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": []
+  },
+  "ec2": {
+    "instances": [
+      {
+        "InstanceId": "i-dev01",
+        "InstanceType": "t3.medium",
+        "State": {"Name": "running", "Code": 16},
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::445566778899:instance-profile/app-instance-profile",
+          "Id": "AIPAAPPPROFILE00000001"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [{"Key": "Name", "Value": "dev-app-server"}]
+      }
+    ]
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "admin-task",
+        "FunctionArn": "arn:aws:lambda:us-east-1:445566778899:function:admin-task",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::445566778899:role/admin-exec-role",
+        "Handler": "index.handler",
+        "CodeSize": 2048,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2026-02-20T11:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}

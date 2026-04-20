@@ -1,0 +1,17 @@
+__pycache__/
+*.egg-info/
+*.egg
+*.pyc
+.coverage
+.venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# don't commit recon dumps or creds
+*.pem
+*.key
+.env
+credentials*

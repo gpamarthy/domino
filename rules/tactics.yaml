@@ -1,0 +1,77 @@
+- name: "PassRole+Lambda Escalation"
+  multiplier: 9
+  match:
+    any:
+      kind: "create"
+      desc_contains: "Lambda"
+
+- name: "Confused Deputy via S3"
+  multiplier: 10
+  match:
+    subsequence: ["s3_access", "s3_trigger", "uses_role"]
+
+- name: "Role Assumption Chain"
+  multiplier: 7
+  match:
+    min_count:
+      kind: "assume_role"
+      count: 2
+
+- name: "EC2 IMDS Credential Theft"
+  multiplier: 8
+  match:
+    any:
+      kind: "imds_creds"
+
+- name: "PassRole+EC2 Escalation"
+  multiplier: 7
+  match:
+    any:
+      kind: "create"
+      desc_contains: "EC2"
+
+- name: "PassRole+Glue Escalation"
+  multiplier: 8
+  match:
+    any:
+      kind: "create"
+      desc_contains: "Glue"
+
+- name: "PassRole+CloudFormation Escalation"
+  multiplier: 9
+  match:
+    any:
+      kind: "create"
+      desc_contains: "CloudFormation"
+
+- name: "PassRole+SageMaker Escalation"
+  multiplier: 8
+  match:
+    any:
+      kind: "create"
+      desc_contains: "SageMaker"
+
+- name: "PassRole+CodeBuild Escalation"
+  multiplier: 8
+  match:
+    any:
+      kind: "create"
+      desc_contains: "CodeBuild"
+
+- name: "IAM Policy Self-Escalation"
+  multiplier: 10
+  match:
+    any:
+      kind: "iam_escalate"
+
+- name: "Lambda Code Hijack"
+  multiplier: 8
+  match:
+    any:
+      kind: "lambda_hijack"
+
+- name: "Direct IAM Manipulation"
+  multiplier: 10
+  match:
+    exact:
+      kind: "assume_role"

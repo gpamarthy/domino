@@ -1,0 +1,161 @@
+{
+  "account_id": "998877665544",
+  "iam": {
+    "users": [],
+    "roles": [
+      {
+        "RoleName": "WAF-role",
+        "Arn": "arn:aws:iam::998877665544:role/WAF-role",
+        "RoleId": "AROACAPONEWAFROLE001",
+        "CreateDate": "2024-11-20T14:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "waf-s3-access",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "S3BucketList",
+                  "Effect": "Allow",
+                  "Action": "s3:ListBucket",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "S3ObjectRead",
+                  "Effect": "Allow",
+                  "Action": "s3:GetObject",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "S3ListAll",
+                  "Effect": "Allow",
+                  "Action": "s3:ListAllMyBuckets",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "AssumeRoles",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "waf-profile",
+            "InstanceProfileId": "AIPACAPONEWAFPROF001",
+            "Arn": "arn:aws:iam::998877665544:instance-profile/waf-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "WAF-role",
+                "Arn": "arn:aws:iam::998877665544:role/WAF-role"
+              }
+            ],
+            "CreateDate": "2024-11-20T14:05:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "backup-admin",
+        "Arn": "arn:aws:iam::998877665544:role/backup-admin",
+        "RoleId": "AROACAPONEBKUPADM01",
+        "CreateDate": "2024-11-20T14:10:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::998877665544:role/WAF-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "backup-full-access",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "FullAdmin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {}
+  },
+  "s3": {
+    "buckets": [
+      {
+        "Name": "customer-pii-data",
+        "Policy": null,
+        "PublicAccessBlock": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        },
+        "ACL": null
+      }
+    ]
+  },
+  "ec2": {
+    "instances": [
+      {
+        "InstanceId": "i-webapp01",
+        "InstanceType": "t3.xlarge",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::998877665544:instance-profile/waf-profile",
+          "Id": "AIPACAPONEWAFPROF001"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "webapp01"
+          }
+        ]
+      }
+    ]
+  },
+  "lambda": {
+    "functions": []
+  }
+}

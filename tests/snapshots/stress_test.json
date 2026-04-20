@@ -1,0 +1,4653 @@
+{
+  "account_id": "111222333444",
+  "iam": {
+    "users": [
+      {
+        "UserName": "dev-intern",
+        "Arn": "arn:aws:iam::111222333444:user/dev-intern",
+        "UserId": "AIDA0000000DEVINTERN",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "dev-permissions",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRole",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:PassRole"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "LambdaOps",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:CreateFunction",
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "AssumeStagingRole",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/data-pipeline-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "sre-oncall",
+        "Arn": "arn:aws:iam::111222333444:user/sre-oncall",
+        "UserId": "AIDA0000000SREONCALL",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "oncall-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "BreakGlass",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/break-glass-admin"
+                  ]
+                },
+                {
+                  "Sid": "ReadAll",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "logs:GetLogEvents"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "data-analyst",
+        "Arn": "arn:aws:iam::111222333444:user/data-analyst",
+        "UserId": "AIDA00000DATAANALYST",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "analyst-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeML",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ml-training-role"
+                  ]
+                },
+                {
+                  "Sid": "AthenaQuery",
+                  "Effect": "Allow",
+                  "Action": [
+                    "athena:StartQueryExecution",
+                    "athena:GetQueryResults"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "ci-bot",
+        "Arn": "arn:aws:iam::111222333444:user/ci-bot",
+        "UserId": "AIDA00000000000CIBOT",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "ci-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeDeploy",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ci-deploy-role"
+                  ]
+                },
+                {
+                  "Sid": "ECR",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ecr:GetAuthorizationToken",
+                    "ecr:BatchGetImage"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "platform-eng",
+        "Arn": "arn:aws:iam::111222333444:user/platform-eng",
+        "UserId": "AIDA00000PLATFORMENG",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "platform-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "SelfEscalate",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:AttachUserPolicy"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "DescribeInfra",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ec2:DescribeInstances",
+                    "rds:DescribeDBInstances",
+                    "ecs:DescribeClusters"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "security-auditor",
+        "Arn": "arn:aws:iam::111222333444:user/security-auditor",
+        "UserId": "AIDA0SECURITYAUDITOR",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "audit-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeAuditRoles",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/log-processor-role",
+                    "arn:aws:iam::111222333444:role/cloudwatch-alerter"
+                  ]
+                },
+                {
+                  "Sid": "ReadSecLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "guardduty:GetFindings",
+                    "securityhub:GetFindings",
+                    "config:GetComplianceDetailsByConfigRule"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "backend-dev",
+        "Arn": "arn:aws:iam::111222333444:user/backend-dev",
+        "UserId": "AIDA000000BACKENDDEV",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "backend-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRole",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:PassRole"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "EC2Ops",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ec2:RunInstances"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CodeBuild",
+                  "Effect": "Allow",
+                  "Action": [
+                    "codebuild:StartBuild",
+                    "codebuild:BatchGetBuilds"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "ml-engineer",
+        "Arn": "arn:aws:iam::111222333444:user/ml-engineer",
+        "UserId": "AIDA000000MLENGINEER",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "ml-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeML",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/event-bridge-processor"
+                  ]
+                },
+                {
+                  "Sid": "SageMaker",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sagemaker:CreateTrainingJob",
+                    "sagemaker:DescribeEndpoint"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "devops-lead",
+        "Arn": "arn:aws:iam::111222333444:user/devops-lead",
+        "UserId": "AIDA000000DEVOPSLEAD",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "devops-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PolicyManip",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:PutRolePolicy"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "LambdaHijack",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:UpdateFunctionCode"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                },
+                {
+                  "Sid": "CloudFormation",
+                  "Effect": "Allow",
+                  "Action": [
+                    "cloudformation:CreateStack",
+                    "cloudformation:DescribeStacks"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "finance-readonly",
+        "Arn": "arn:aws:iam::111222333444:user/finance-readonly",
+        "UserId": "AIDA0FINANCEREADONLY",
+        "CreateDate": "2025-08-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "finance-perms",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeCost",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/cost-optimizer-role"
+                  ]
+                },
+                {
+                  "Sid": "Billing",
+                  "Effect": "Allow",
+                  "Action": [
+                    "ce:GetCostAndUsage",
+                    "budgets:DescribeBudgets"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "org-admin-role",
+        "Arn": "arn:aws:iam::111222333444:role/org-admin-role",
+        "RoleId": "AROA0000ORGADMINROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/ci-deploy-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "break-glass-admin",
+        "Arn": "arn:aws:iam::111222333444:role/break-glass-admin",
+        "RoleId": "AROA0BREAKGLASSADMIN",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/db-migration-runner"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "infra-terraform-admin",
+        "Arn": "arn:aws:iam::111222333444:role/infra-terraform-admin",
+        "RoleId": "AROAINFRATERRAFORMAD",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/release-manager-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "security-incident-admin",
+        "Arn": "arn:aws:iam::111222333444:role/security-incident-admin",
+        "RoleId": "AROASECURITYINCIDENT",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/cost-optimizer-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "platform-superadmin",
+        "Arn": "arn:aws:iam::111222333444:role/platform-superadmin",
+        "RoleId": "AROAPLATFORMSUPERADM",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "ci-deploy-role",
+        "Arn": "arn:aws:iam::111222333444:role/ci-deploy-role",
+        "RoleId": "AROA0000CIDEPLOYROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/data-pipeline-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/report-generator-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/legacy-monolith-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/ingest-processor-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/org-admin-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "db-migration-runner",
+        "Arn": "arn:aws:iam::111222333444:role/db-migration-runner",
+        "RoleId": "AROADBMIGRATIONRUNNE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/ml-training-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/backup-rotation-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/etl-transform-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/break-glass-admin"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "release-manager-role",
+        "Arn": "arn:aws:iam::111222333444:role/release-manager-role",
+        "RoleId": "AROARELEASEMANAGERRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/log-processor-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/staging-app-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/auth-validator-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/infra-terraform-admin"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "cost-optimizer-role",
+        "Arn": "arn:aws:iam::111222333444:role/cost-optimizer-role",
+        "RoleId": "AROACOSTOPTIMIZERROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/etl-scheduler-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/pdf-generator-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/security-incident-admin"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "data-pipeline-role",
+        "Arn": "arn:aws:iam::111222333444:role/data-pipeline-role",
+        "RoleId": "AROADATAPIPELINEROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/event-bridge-processor"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/web-frontend-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/notification-handler-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ci-deploy-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "ml-training-role",
+        "Arn": "arn:aws:iam::111222333444:role/ml-training-role",
+        "RoleId": "AROA00MLTRAININGROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/sqs-consumer-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/api-gateway-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/image-resizer-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/db-migration-runner"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "log-processor-role",
+        "Arn": "arn:aws:iam::111222333444:role/log-processor-role",
+        "RoleId": "AROALOGPROCESSORROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/cloudwatch-alerter"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/webhook-relay-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/release-manager-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "etl-scheduler-role",
+        "Arn": "arn:aws:iam::111222333444:role/etl-scheduler-role",
+        "RoleId": "AROAETLSCHEDULERROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/kinesis-ingest-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/slack-notifier-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/cost-optimizer-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "report-generator-role",
+        "Arn": "arn:aws:iam::111222333444:role/report-generator-role",
+        "RoleId": "AROAREPORTGENERATORR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/glue-crawler-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ci-deploy-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "backup-rotation-role",
+        "Arn": "arn:aws:iam::111222333444:role/backup-rotation-role",
+        "RoleId": "AROABACKUPROTATIONRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/step-function-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/db-migration-runner"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "event-bridge-processor",
+        "Arn": "arn:aws:iam::111222333444:role/event-bridge-processor",
+        "RoleId": "AROAEVENTBRIDGEPROCE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/batch-worker-role"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/audit-log-shipper-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/data-pipeline-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "sqs-consumer-role",
+        "Arn": "arn:aws:iam::111222333444:role/sqs-consumer-role",
+        "RoleId": "AROA0SQSCONSUMERROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:role/s3-janitor-exec"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ml-training-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "cloudwatch-alerter",
+        "Arn": "arn:aws:iam::111222333444:role/cloudwatch-alerter",
+        "RoleId": "AROACLOUDWATCHALERTE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/log-processor-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "kinesis-ingest-role",
+        "Arn": "arn:aws:iam::111222333444:role/kinesis-ingest-role",
+        "RoleId": "AROAKINESISINGESTROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/etl-scheduler-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "glue-crawler-role",
+        "Arn": "arn:aws:iam::111222333444:role/glue-crawler-role",
+        "RoleId": "AROA0GLUECRAWLERROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/report-generator-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "step-function-exec",
+        "Arn": "arn:aws:iam::111222333444:role/step-function-exec",
+        "RoleId": "AROASTEPFUNCTIONEXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-up",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/backup-rotation-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "web-frontend-role",
+        "Arn": "arn:aws:iam::111222333444:role/web-frontend-role",
+        "RoleId": "AROA0WEBFRONTENDROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-chain",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Assume",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/data-pipeline-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "web-frontend-role-profile",
+            "InstanceProfileId": "AIPAWEBFRONTENDROL",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/web-frontend-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "web-frontend-role",
+                "Arn": "arn:aws:iam::111222333444:role/web-frontend-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "api-gateway-role",
+        "Arn": "arn:aws:iam::111222333444:role/api-gateway-role",
+        "RoleId": "AROA00APIGATEWAYROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-chain",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Assume",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ml-training-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "api-gateway-role-profile",
+            "InstanceProfileId": "AIPAAPIGATEWAYROLE",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/api-gateway-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "api-gateway-role",
+                "Arn": "arn:aws:iam::111222333444:role/api-gateway-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "batch-worker-role",
+        "Arn": "arn:aws:iam::111222333444:role/batch-worker-role",
+        "RoleId": "AROA0BATCHWORKERROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-chain",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Assume",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/event-bridge-processor"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "batch-worker-role-profile",
+            "InstanceProfileId": "AIPABATCHWORKERROL",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/batch-worker-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "batch-worker-role",
+                "Arn": "arn:aws:iam::111222333444:role/batch-worker-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "legacy-monolith-role",
+        "Arn": "arn:aws:iam::111222333444:role/legacy-monolith-role",
+        "RoleId": "AROALEGACYMONOLITHRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-chain",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Assume",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ci-deploy-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "legacy-monolith-role-profile",
+            "InstanceProfileId": "AIPALEGACYMONOLITH",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/legacy-monolith-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "legacy-monolith-role",
+                "Arn": "arn:aws:iam::111222333444:role/legacy-monolith-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "staging-app-role",
+        "Arn": "arn:aws:iam::111222333444:role/staging-app-role",
+        "RoleId": "AROA00STAGINGAPPROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-chain",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Assume",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/release-manager-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "staging-app-role-profile",
+            "InstanceProfileId": "AIPASTAGINGAPPROLE",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/staging-app-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "staging-app-role",
+                "Arn": "arn:aws:iam::111222333444:role/staging-app-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "hardened-api-role",
+        "Arn": "arn:aws:iam::111222333444:role/hardened-api-role",
+        "RoleId": "AROA0HARDENEDAPIROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:GetLogEvents",
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "hardened-api-role-profile",
+            "InstanceProfileId": "AIPAHARDENEDAPIROL",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/hardened-api-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "hardened-api-role",
+                "Arn": "arn:aws:iam::111222333444:role/hardened-api-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "prod-backend-role",
+        "Arn": "arn:aws:iam::111222333444:role/prod-backend-role",
+        "RoleId": "AROA0PRODBACKENDROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:GetLogEvents",
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "prod-backend-role-profile",
+            "InstanceProfileId": "AIPAPRODBACKENDROL",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/prod-backend-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "prod-backend-role",
+                "Arn": "arn:aws:iam::111222333444:role/prod-backend-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "internal-tooling-role",
+        "Arn": "arn:aws:iam::111222333444:role/internal-tooling-role",
+        "RoleId": "AROAINTERNALTOOLINGR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:GetLogEvents",
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "internal-tooling-role-profile",
+            "InstanceProfileId": "AIPAINTERNALTOOLIN",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/internal-tooling-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "internal-tooling-role",
+                "Arn": "arn:aws:iam::111222333444:role/internal-tooling-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "monitoring-agent-role",
+        "Arn": "arn:aws:iam::111222333444:role/monitoring-agent-role",
+        "RoleId": "AROAMONITORINGAGENTR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:GetLogEvents",
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "monitoring-agent-role-profile",
+            "InstanceProfileId": "AIPAMONITORINGAGEN",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/monitoring-agent-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "monitoring-agent-role",
+                "Arn": "arn:aws:iam::111222333444:role/monitoring-agent-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "vault-proxy-role",
+        "Arn": "arn:aws:iam::111222333444:role/vault-proxy-role",
+        "RoleId": "AROA00VAULTPROXYROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:GetLogEvents",
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "vault-proxy-role-profile",
+            "InstanceProfileId": "AIPAVAULTPROXYROLE",
+            "Arn": "arn:aws:iam::111222333444:instance-profile/vault-proxy-role-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "vault-proxy-role",
+                "Arn": "arn:aws:iam::111222333444:role/vault-proxy-role"
+              }
+            ],
+            "CreateDate": "2025-09-01T08:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "ingest-processor-exec",
+        "Arn": "arn:aws:iam::111222333444:role/ingest-processor-exec",
+        "RoleId": "AROAINGESTPROCESSORE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ci-deploy-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "etl-transform-exec",
+        "Arn": "arn:aws:iam::111222333444:role/etl-transform-exec",
+        "RoleId": "AROAETLTRANSFORMEXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/db-migration-runner"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "notification-handler-exec",
+        "Arn": "arn:aws:iam::111222333444:role/notification-handler-exec",
+        "RoleId": "AROANOTIFICATIONHAND",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/data-pipeline-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "image-resizer-exec",
+        "Arn": "arn:aws:iam::111222333444:role/image-resizer-exec",
+        "RoleId": "AROAIMAGERESIZEREXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/ml-training-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "auth-validator-exec",
+        "Arn": "arn:aws:iam::111222333444:role/auth-validator-exec",
+        "RoleId": "AROAAUTHVALIDATOREXE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/release-manager-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "pdf-generator-exec",
+        "Arn": "arn:aws:iam::111222333444:role/pdf-generator-exec",
+        "RoleId": "AROAPDFGENERATOREXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/cost-optimizer-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "webhook-relay-exec",
+        "Arn": "arn:aws:iam::111222333444:role/webhook-relay-exec",
+        "RoleId": "AROAWEBHOOKRELAYEXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/log-processor-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "slack-notifier-exec",
+        "Arn": "arn:aws:iam::111222333444:role/slack-notifier-exec",
+        "RoleId": "AROASLACKNOTIFIEREXE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/etl-scheduler-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "audit-log-shipper-exec",
+        "Arn": "arn:aws:iam::111222333444:role/audit-log-shipper-exec",
+        "RoleId": "AROAAUDITLOGSHIPPERE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/event-bridge-processor"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "s3-janitor-exec",
+        "Arn": "arn:aws:iam::111222333444:role/s3-janitor-exec",
+        "RoleId": "AROA000S3JANITOREXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Chain",
+                  "Effect": "Allow",
+                  "Action": [
+                    "sts:AssumeRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::111222333444:role/sqs-consumer-role"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "cloudfront-origin-access",
+        "Arn": "arn:aws:iam::111222333444:role/cloudfront-origin-access",
+        "RoleId": "AROACLOUDFRONTORIGIN",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "ses-email-sender",
+        "Arn": "arn:aws:iam::111222333444:role/ses-email-sender",
+        "RoleId": "AROA00SESEMAILSENDER",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "sns-publisher-role",
+        "Arn": "arn:aws:iam::111222333444:role/sns-publisher-role",
+        "RoleId": "AROASNSPUBLISHERROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "dynamodb-stream-handler",
+        "Arn": "arn:aws:iam::111222333444:role/dynamodb-stream-handler",
+        "RoleId": "AROADYNAMODBSTREAMHA",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "rds-monitoring-role",
+        "Arn": "arn:aws:iam::111222333444:role/rds-monitoring-role",
+        "RoleId": "AROARDSMONITORINGROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "ecs-task-exec-role",
+        "Arn": "arn:aws:iam::111222333444:role/ecs-task-exec-role",
+        "RoleId": "AROA0ECSTASKEXECROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "codebuild-runner",
+        "Arn": "arn:aws:iam::111222333444:role/codebuild-runner",
+        "RoleId": "AROA0CODEBUILDRUNNER",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "codepipeline-exec",
+        "Arn": "arn:aws:iam::111222333444:role/codepipeline-exec",
+        "RoleId": "AROACODEPIPELINEEXEC",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "config-recorder-role",
+        "Arn": "arn:aws:iam::111222333444:role/config-recorder-role",
+        "RoleId": "AROACONFIGRECORDERRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "guardduty-detector-role",
+        "Arn": "arn:aws:iam::111222333444:role/guardduty-detector-role",
+        "RoleId": "AROAGUARDDUTYDETECTO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "inspector-scan-role",
+        "Arn": "arn:aws:iam::111222333444:role/inspector-scan-role",
+        "RoleId": "AROAINSPECTORSCANROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "macie-classifier-role",
+        "Arn": "arn:aws:iam::111222333444:role/macie-classifier-role",
+        "RoleId": "AROAMACIECLASSIFIERR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "access-analyzer-role",
+        "Arn": "arn:aws:iam::111222333444:role/access-analyzer-role",
+        "RoleId": "AROAACCESSANALYZERRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "waf-logging-role",
+        "Arn": "arn:aws:iam::111222333444:role/waf-logging-role",
+        "RoleId": "AROA00WAFLOGGINGROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "shield-responder-role",
+        "Arn": "arn:aws:iam::111222333444:role/shield-responder-role",
+        "RoleId": "AROASHIELDRESPONDERR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "organizations-readonly",
+        "Arn": "arn:aws:iam::111222333444:role/organizations-readonly",
+        "RoleId": "AROAORGANIZATIONSREA",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "sso-permission-set-a",
+        "Arn": "arn:aws:iam::111222333444:role/sso-permission-set-a",
+        "RoleId": "AROASSOPERMISSIONSET",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "sso-permission-set-b",
+        "Arn": "arn:aws:iam::111222333444:role/sso-permission-set-b",
+        "RoleId": "AROASSOPERMISSIONSET",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "transfer-family-role",
+        "Arn": "arn:aws:iam::111222333444:role/transfer-family-role",
+        "RoleId": "AROATRANSFERFAMILYRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "datasync-agent-role",
+        "Arn": "arn:aws:iam::111222333444:role/datasync-agent-role",
+        "RoleId": "AROADATASYNCAGENTROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "appflow-connector-role",
+        "Arn": "arn:aws:iam::111222333444:role/appflow-connector-role",
+        "RoleId": "AROAAPPFLOWCONNECTOR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "eventbridge-scheduler-role",
+        "Arn": "arn:aws:iam::111222333444:role/eventbridge-scheduler-role",
+        "RoleId": "AROAEVENTBRIDGESCHED",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "iot-device-shadow-role",
+        "Arn": "arn:aws:iam::111222333444:role/iot-device-shadow-role",
+        "RoleId": "AROAIOTDEVICESHADOWR",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "iot-rules-engine-role",
+        "Arn": "arn:aws:iam::111222333444:role/iot-rules-engine-role",
+        "RoleId": "AROAIOTRULESENGINERO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "sagemaker-notebook-role",
+        "Arn": "arn:aws:iam::111222333444:role/sagemaker-notebook-role",
+        "RoleId": "AROASAGEMAKERNOTEBOO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "comprehend-analysis-role",
+        "Arn": "arn:aws:iam::111222333444:role/comprehend-analysis-role",
+        "RoleId": "AROACOMPREHENDANALYS",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "textract-processor-role",
+        "Arn": "arn:aws:iam::111222333444:role/textract-processor-role",
+        "RoleId": "AROATEXTRACTPROCESSO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "rekognition-face-role",
+        "Arn": "arn:aws:iam::111222333444:role/rekognition-face-role",
+        "RoleId": "AROAREKOGNITIONFACER",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "transcribe-medical-role",
+        "Arn": "arn:aws:iam::111222333444:role/transcribe-medical-role",
+        "RoleId": "AROATRANSCRIBEMEDICA",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "polly-speech-role",
+        "Arn": "arn:aws:iam::111222333444:role/polly-speech-role",
+        "RoleId": "AROA0POLLYSPEECHROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "lex-bot-runtime-role",
+        "Arn": "arn:aws:iam::111222333444:role/lex-bot-runtime-role",
+        "RoleId": "AROALEXBOTRUNTIMEROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "kendra-index-role",
+        "Arn": "arn:aws:iam::111222333444:role/kendra-index-role",
+        "RoleId": "AROA0KENDRAINDEXROLE",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "personalize-campaign-role",
+        "Arn": "arn:aws:iam::111222333444:role/personalize-campaign-role",
+        "RoleId": "AROAPERSONALIZECAMPA",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "forecast-predictor-role",
+        "Arn": "arn:aws:iam::111222333444:role/forecast-predictor-role",
+        "RoleId": "AROAFORECASTPREDICTO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "fraud-detector-role",
+        "Arn": "arn:aws:iam::111222333444:role/fraud-detector-role",
+        "RoleId": "AROAFRAUDDETECTORROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "lookout-metrics-role",
+        "Arn": "arn:aws:iam::111222333444:role/lookout-metrics-role",
+        "RoleId": "AROALOOKOUTMETRICSRO",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "healthlake-store-role",
+        "Arn": "arn:aws:iam::111222333444:role/healthlake-store-role",
+        "RoleId": "AROAHEALTHLAKESTORER",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "timestream-writer-role",
+        "Arn": "arn:aws:iam::111222333444:role/timestream-writer-role",
+        "RoleId": "AROATIMESTREAMWRITER",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "neptune-loader-role",
+        "Arn": "arn:aws:iam::111222333444:role/neptune-loader-role",
+        "RoleId": "AROANEPTUNELOADERROL",
+        "CreateDate": "2025-09-01T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111222333444:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "read-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "logs:GetLogEvents",
+                    "cloudwatch:GetMetricData"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": [
+      {
+        "Name": "analytics-exports",
+        "ACL": null,
+        "PublicAccessBlock": null,
+        "Policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "PublicAccess",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject"
+              ],
+              "Resource": "arn:aws:s3:::analytics-exports/*"
+            }
+          ]
+        }
+      },
+      {
+        "Name": "ml-training-data",
+        "ACL": null,
+        "PublicAccessBlock": null,
+        "Policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "PublicAccess",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject"
+              ],
+              "Resource": "arn:aws:s3:::ml-training-data/*"
+            }
+          ]
+        }
+      },
+      {
+        "Name": "compliance-reports",
+        "ACL": null,
+        "PublicAccessBlock": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "Policy": null
+      },
+      {
+        "Name": "prod-database-backups",
+        "ACL": null,
+        "PublicAccessBlock": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "Policy": null
+      },
+      {
+        "Name": "internal-artifacts",
+        "ACL": null,
+        "PublicAccessBlock": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "Policy": null
+      }
+    ]
+  },
+  "ec2": {
+    "instances": [
+      {
+        "InstanceId": "i-0000webfront",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/web-frontend-role-profile",
+          "Id": "AIPAWEBFRONTENDROL"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "web-prod-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0001apigatew",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/api-gateway-role-profile",
+          "Id": "AIPAAPIGATEWAYROLE"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "api-prod-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0002batchwor",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/batch-worker-role-profile",
+          "Id": "AIPABATCHWORKERROL"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "batch-worker-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0003legacymo",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/legacy-monolith-role-profile",
+          "Id": "AIPALEGACYMONOLITH"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "legacy-app-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0004staginga",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/staging-app-role-profile",
+          "Id": "AIPASTAGINGAPPROLE"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "staging-app-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0005hardened",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/hardened-api-role-profile",
+          "Id": "AIPAHARDENEDAPIROL"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "required",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "hardened-api-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0006prodback",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/prod-backend-role-profile",
+          "Id": "AIPAPRODBACKENDROL"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "required",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "prod-backend-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0007internal",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/internal-tooling-role-profile",
+          "Id": "AIPAINTERNALTOOLIN"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "required",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "internal-tools-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0008monitori",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/monitoring-agent-role-profile",
+          "Id": "AIPAMONITORINGAGEN"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "required",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "mon-agent-01"
+          }
+        ]
+      },
+      {
+        "InstanceId": "i-0009vaultpro",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::111222333444:instance-profile/vault-proxy-role-profile",
+          "Id": "AIPAVAULTPROXYROLE"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "required",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "vault-proxy-01"
+          }
+        ]
+      }
+    ]
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "ingest-processor",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:ingest-processor",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/ingest-processor-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [
+          {
+            "Bucket": "analytics-exports"
+          }
+        ],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "etl-transform",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:etl-transform",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/etl-transform-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "notification-handler",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:notification-handler",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/notification-handler-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "image-resizer",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:image-resizer",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/image-resizer-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [
+          {
+            "Bucket": "ml-training-data"
+          }
+        ],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "auth-validator",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:auth-validator",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/auth-validator-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "pdf-generator",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:pdf-generator",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/pdf-generator-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "webhook-relay",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:webhook-relay",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/webhook-relay-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "slack-notifier",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:slack-notifier",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/slack-notifier-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "audit-log-shipper",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:audit-log-shipper",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/audit-log-shipper-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      },
+      {
+        "FunctionName": "s3-janitor",
+        "FunctionArn": "arn:aws:lambda:us-east-1:111222333444:function:s3-janitor",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::111222333444:role/s3-janitor-exec",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-10-01T14:00:00.000+0000",
+        "S3Triggers": [
+          {
+            "Bucket": "compliance-reports"
+          }
+        ],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}
