@@ -6,14 +6,14 @@ Domino is a specialized security tool for AWS environments that identifies multi
 
 ---
 
-## 🛡️ Security Disclaimer
+## Security Disclaimer
 
 **FOR EDUCATIONAL AND ETHICAL TESTING PURPOSES ONLY.**
 The use of Domino for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program.
 
 ---
 
-## ✨ Features
+## Features
 
 - **Graph-Based Analysis**: Models IAM relationships using `networkx` to find non-obvious attack paths.
 - **YAML Tactics Engine**: Customizable attack patterns defined in `rules/tactics.yaml`.
@@ -25,7 +25,7 @@ The use of Domino for attacking targets without prior mutual consent is illegal.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -60,7 +60,7 @@ domino --snapshot ./recon.json --json-out results.json -v
 
 ---
 
-## 🏗️ Architectural Overview
+## Architectural Overview
 
 Domino operates in three primary phases:
 
@@ -76,12 +76,12 @@ Attack patterns are dynamically loaded from `rules/tactics.yaml`. This allows se
 
 ---
 
-## ⚖️ Compliance & Legality
+## Compliance & Legality
 
 Domino is built with a strict "100% legality" mandate. It performs read-only reconnaissance and logical analysis. It does not perform active exploitation, credential brute-forcing, or unauthorized access attempts.
 
 ---
 
-## 📜 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
