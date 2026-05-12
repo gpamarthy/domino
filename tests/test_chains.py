@@ -186,7 +186,7 @@ def test_empty_graph_no_chains():
 
 
 def test_missing_principal_raises(g):
-    with pytest.raises(Exception):
+    with pytest.raises(nx.NodeNotFound):
         find_chains(g, "arn:aws:iam::999999999999:user/ghost")
 
 

@@ -61,7 +61,7 @@ def test_render_verbose(capsys):
     assert "Chain #1" in out
 
 
-def test_render_score_colors(capsys):
+def test_render_score_colors():
     # high, mid, low scores exercise all branches
     chains = [
         _make_chain(score=9.0),

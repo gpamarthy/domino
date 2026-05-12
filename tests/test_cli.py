@@ -85,7 +85,7 @@ def test_snapshot_with_start_principal(capsys):
     assert "domino found" in out
 
 
-def test_json_export(capsys, tmp_path):
+def test_json_export(tmp_path):
     out_file = tmp_path / "chains.json"
     with patch("sys.argv", ["domino", "--demo", "--json-out", str(out_file)]):
         main()
@@ -94,7 +94,7 @@ def test_json_export(capsys, tmp_path):
     assert isinstance(data, list)
 
 
-def test_no_args_exits(capsys):
+def test_no_args_exits():
     with patch("sys.argv", ["domino"]):
         with pytest.raises(SystemExit) as exc:
             main()
