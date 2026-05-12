@@ -16,7 +16,7 @@ ACCT = "111222333444"
 REGION = "us-east-1"
 
 
-def arn(kind, name, service=None):
+def arn(kind, name):
     if kind == "role":
         return f"arn:aws:iam::{ACCT}:role/{name}"
     if kind == "user":
