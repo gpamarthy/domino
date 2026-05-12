@@ -1,0 +1,422 @@
+{
+  "account_id": "999000111222",
+  "iam": {
+    "users": [
+      {
+        "UserName": "scoped-passrole-user",
+        "Arn": "arn:aws:iam::999000111222:user/scoped-passrole-user",
+        "UserId": "AIDASCOPED00000000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "scoped-passrole-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRoleScoped",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "arn:aws:iam::999000111222:role/target-lambda-role"
+                },
+                {
+                  "Sid": "LambdaOps",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:CreateFunction",
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "wildcard-user",
+        "Arn": "arn:aws:iam::999000111222:user/wildcard-user",
+        "UserId": "AIDAWILDCARD0000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "sts-wildcard",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "StsWild",
+                  "Effect": "Allow",
+                  "Action": "sts:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "nearadmin-user",
+        "Arn": "arn:aws:iam::999000111222:user/nearadmin-user",
+        "UserId": "AIDANEARADMIN000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "assume-iam-power",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeIamPower",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::999000111222:role/iam-power-role"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "mixed-resource-user",
+        "Arn": "arn:aws:iam::999000111222:user/mixed-resource-user",
+        "UserId": "AIDAMIXEDRES00000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "mixed-resource-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRoleWildcardPrefix",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "arn:aws:iam::999000111222:role/specific-*"
+                },
+                {
+                  "Sid": "LambdaOps",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:CreateFunction",
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "local-user",
+        "Arn": "arn:aws:iam::999000111222:user/local-user",
+        "UserId": "AIDALOCALUSER000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "assume-cross-acct",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeCrossAcct",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::999000111222:role/cross-account-role"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "target-lambda-role",
+        "Arn": "arn:aws:iam::999000111222:role/target-lambda-role",
+        "RoleId": "AROATARGETLAMBDA00001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "unreachable-role",
+        "Arn": "arn:aws:iam::999000111222:role/unreachable-role",
+        "RoleId": "AROAUNREACHABLE00001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "wild-target",
+        "Arn": "arn:aws:iam::999000111222:role/wild-target",
+        "RoleId": "AROAWILDTARGET000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::999000111222:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "iam-power-role",
+        "Arn": "arn:aws:iam::999000111222:role/iam-power-role",
+        "RoleId": "AROAIAMPOWER000000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::999000111222:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "iam-star",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "IamStar",
+                  "Effect": "Allow",
+                  "Action": "iam:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "specific-admin-role",
+        "Arn": "arn:aws:iam::999000111222:role/specific-admin-role",
+        "RoleId": "AROASPECIFICADM000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "other-admin-role",
+        "Arn": "arn:aws:iam::999000111222:role/other-admin-role",
+        "RoleId": "AROAOTHERADMIN000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "cross-account-role",
+        "Arn": "arn:aws:iam::999000111222:role/cross-account-role",
+        "RoleId": "AROACROSSACCT00000001",
+        "CreateDate": "2026-01-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::888888888888:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "Admin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {}
+  },
+  "s3": {
+    "buckets": []
+  },
+  "ec2": {
+    "instances": []
+  },
+  "lambda": {
+    "functions": []
+  }
+}

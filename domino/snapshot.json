@@ -1,0 +1,368 @@
+{
+  "account_id": "123456789012",
+  "iam": {
+    "users": [
+      {
+        "UserName": "dev-user",
+        "Arn": "arn:aws:iam::123456789012:user/dev-user",
+        "UserId": "AIDADEVUSER000000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "dev-escalation-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRoleAll",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "LambdaFullAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:CreateFunction",
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "AssumeStagingRole",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::123456789012:role/staging-role"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "admin-lambda-role",
+        "Arn": "arn:aws:iam::123456789012:role/admin-lambda-role",
+        "RoleId": "AROAADMLAMBDA00000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "data-processor-role",
+        "Arn": "arn:aws:iam::123456789012:role/data-processor-role",
+        "RoleId": "AROADATAPROC000000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ChainToAdmin",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::123456789012:role/admin-role"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "web-role",
+        "Arn": "arn:aws:iam::123456789012:role/web-role",
+        "RoleId": "AROAWEBROLE0000000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-deploy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ChainToDeploy",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::123456789012:role/deploy-role"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "web-profile",
+            "InstanceProfileId": "AIPAWEB0000000000001",
+            "Arn": "arn:aws:iam::123456789012:instance-profile/web-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "web-role",
+                "Arn": "arn:aws:iam::123456789012:role/web-role"
+              }
+            ],
+            "CreateDate": "2025-06-15T10:00:00Z"
+          }
+        ]
+      },
+      {
+        "RoleName": "deploy-role",
+        "Arn": "arn:aws:iam::123456789012:role/deploy-role",
+        "RoleId": "AROADEPLOYROLE0000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::123456789012:role/web-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ChainToAdmin",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::123456789012:role/admin-role"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "staging-role",
+        "Arn": "arn:aws:iam::123456789012:role/staging-role",
+        "RoleId": "AROASTAGINGROLE00001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::123456789012:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "assume-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ChainToAdmin",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::123456789012:role/admin-role"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "admin-role",
+        "Arn": "arn:aws:iam::123456789012:role/admin-role",
+        "RoleId": "AROAADMINROLE00000001",
+        "CreateDate": "2025-06-15T10:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": [
+                  "arn:aws:iam::123456789012:role/data-processor-role",
+                  "arn:aws:iam::123456789012:role/deploy-role",
+                  "arn:aws:iam::123456789012:role/staging-role"
+                ]
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "FullAdmin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": [
+      {
+        "Name": "data-inbox",
+        "Policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "PublicPut",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": "arn:aws:s3:::data-inbox/*"
+            }
+          ]
+        },
+        "PublicAccessBlock": null,
+        "ACL": null
+      }
+    ]
+  },
+  "ec2": {
+    "instances": [
+      {
+        "InstanceId": "i-webserver01",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::123456789012:instance-profile/web-profile",
+          "Id": "AIPAWEB0000000000001"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "webserver01"
+          }
+        ]
+      }
+    ]
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "data-processor",
+        "FunctionArn": "arn:aws:lambda:us-east-1:123456789012:function:data-processor",
+        "Runtime": "python3.11",
+        "Role": "arn:aws:iam::123456789012:role/data-processor-role",
+        "Handler": "index.handler",
+        "CodeSize": 2048,
+        "Timeout": 300,
+        "MemorySize": 256,
+        "LastModified": "2025-06-15T12:00:00.000+0000",
+        "S3Triggers": [
+          {
+            "Bucket": "data-inbox"
+          }
+        ],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}

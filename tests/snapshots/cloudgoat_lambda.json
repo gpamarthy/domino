@@ -1,0 +1,191 @@
+{
+  "account_id": "112233445566",
+  "iam": {
+    "users": [
+      {
+        "UserName": "chris",
+        "Arn": "arn:aws:iam::112233445566:user/chris",
+        "UserId": "AIDACG0CHRIS00000001",
+        "CreateDate": "2025-03-10T08:30:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "chris-base-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeAny",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "IAMRecon",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:List*",
+                    "iam:Get*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "lambdaManager",
+        "Arn": "arn:aws:iam::112233445566:role/lambdaManager",
+        "RoleId": "AROACGLAMBDAMGR00001",
+        "CreateDate": "2025-03-10T08:35:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::112233445566:user/chris"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "lambda-mgr-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "LambdaAll",
+                  "Effect": "Allow",
+                  "Action": "lambda:*",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "PassRoleAll",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "debug-role",
+        "Arn": "arn:aws:iam::112233445566:role/debug-role",
+        "RoleId": "AROACGDEBUGROLE00001",
+        "CreateDate": "2025-03-10T08:40:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "readonly-role",
+        "Arn": "arn:aws:iam::112233445566:role/readonly-role",
+        "RoleId": "AROACGREADONLYROLE01",
+        "CreateDate": "2025-03-10T08:45:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::112233445566:user/chris"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "readonly-iam-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "IAMReadOnly",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:Get*",
+                    "iam:List*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": []
+  },
+  "ec2": {
+    "instances": []
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "debug-func",
+        "FunctionArn": "arn:aws:lambda:us-east-1:112233445566:function:debug-func",
+        "Runtime": "python3.11",
+        "Role": "arn:aws:iam::112233445566:role/debug-role",
+        "Handler": "index.handler",
+        "CodeSize": 1024,
+        "Timeout": 60,
+        "MemorySize": 128,
+        "LastModified": "2025-03-10T09:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}

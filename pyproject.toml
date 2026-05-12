@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "domino"
+version = "0.1.0"
+requires-python = ">=3.10"
+description = "AWS exploit chain prover"
+license = "MIT"
+dependencies = [
+    "boto3>=1.28",
+    "networkx>=3.1",
+    "rich>=13.0",
+    "structlog>=24.1",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "moto[all]>=4.2",
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "bandit>=1.7",
+    "pip-audit>=2.6",
+    "boto3-stubs[iam,s3,ec2,lambda,sts]",
+]
+
+[project.scripts]
+domino = "domino.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["domino*"]
+
+[tool.setuptools.package-data]
+domino = ["snapshot.json"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"

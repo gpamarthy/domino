@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# commit-msg hook: reject messages that look AI-generated.
+# catches Claude, Copilot, Cursor, GPT patterns.
+#
+
+MSG_FILE="$1"
+MSG=$(cat "$MSG_FILE")
+SUBJECT=$(echo "$MSG" | head -1)
+BODY=$(echo "$MSG" | tail -n +3)
+
+RED='\033[0;31m'
+YLW='\033[1;33m'
+NC='\033[0m'
+
+fail() {
+    echo -e "${RED}[commit-msg]${NC} $1" >&2
+    echo -e "${YLW}  tip:${NC} $2" >&2
+    exit 1
+}
+
+# AI co-author tags
+if echo "$MSG" | grep -qiE "co-authored-by:.*(claude|copilot|cursor|gpt|anthropic|openai|noreply@anthropic)"; then
+    fail "AI co-author tag" "remove the Co-Authored-By line"
+fi
+
+# AI tool footers
+if echo "$MSG" | grep -qiE "(generated with|created by|powered by).*(claude|copilot|cursor|chatgpt)"; then
+    fail "AI tool footer" "write your own message"
+fi
+if echo "$MSG" | grep -qE "🤖|Generated with \["; then
+    fail "AI generation marker" "drop the robot emoji and tool link"
+fi
+
+# "This commit" / "In this commit" openers
+if echo "$SUBJECT" | grep -qiE "^(this commit|in this commit|this (pr|pull request|change|patch))"; then
+    fail "'This commit...' opener" "just say what changed: 'fix auth timeout' not 'This commit fixes...'"
+fi
+
+# overly formal "before/after" pattern
+if echo "$MSG" | grep -qiE "prior to this change"; then
+    fail "'Prior to this change...' structure" "just describe what you did"
+fi
+
+# section headers in commit body
+if echo "$BODY" | grep -qiE "^(motivation|changes|summary|description|context|rationale|background):"; then
+    fail "formal section headers in body" "save the essay format for PRs"
+fi
+
+# generic do-nothing messages
+if echo "$SUBJECT" | grep -qiE "^(updated? (files|code|dependencies)|fix bugs?|improve performance|address (issue|problem)|misc (changes|updates|fixes))$"; then
+    fail "vague placeholder message" "be specific: what broke? what changed?"
+fi
+
+# subject too long
+if [ "${#SUBJECT}" -gt 72 ]; then
+    fail "subject is ${#SUBJECT} chars (max 72)" "keep it short, details go in the body"
+fi
+
+# too many bullet points (AI loves lists)
+BULLETS=$(echo "$BODY" | grep -cE "^\s*[-*•]" || true)
+if [ "$BULLETS" -gt 5 ]; then
+    fail "$BULLETS bullet points in body" "this is a commit, not a changelog"
+fi
+
+exit 0

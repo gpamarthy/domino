@@ -1,0 +1,436 @@
+{
+  "account_id": "554433221100",
+  "iam": {
+    "users": [
+      {
+        "UserName": "privesc-passrole-lambda-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-passrole-lambda-user",
+        "UserId": "AIDAIVPASSLAMBDA0001",
+        "CreateDate": "2025-01-05T09:00:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "passrole-lambda-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRole",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "LambdaCreateInvoke",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:CreateFunction",
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-attach-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-attach-user",
+        "UserId": "AIDAIVATTACHUSER0001",
+        "CreateDate": "2025-01-05T09:05:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "attach-policy-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AttachAny",
+                  "Effect": "Allow",
+                  "Action": "iam:AttachUserPolicy",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-put-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-put-user",
+        "UserId": "AIDAIVPUTUSER0000001",
+        "CreateDate": "2025-01-05T09:10:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "put-policy-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PutAny",
+                  "Effect": "Allow",
+                  "Action": "iam:PutUserPolicy",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-create-policy-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-create-policy-user",
+        "UserId": "AIDAIVCREATEPOL00001",
+        "CreateDate": "2025-01-05T09:15:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "create-policy-version-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "CreateVersion",
+                  "Effect": "Allow",
+                  "Action": "iam:CreatePolicyVersion",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-update-trust-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-update-trust-user",
+        "UserId": "AIDAIVUPDATETRUST001",
+        "CreateDate": "2025-01-05T09:20:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "update-trust-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "UpdateTrust",
+                  "Effect": "Allow",
+                  "Action": "iam:UpdateAssumeRolePolicy",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "AssumeAny",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-lambda-update-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-lambda-update-user",
+        "UserId": "AIDAIVLAMBDAUPDT0001",
+        "CreateDate": "2025-01-05T09:25:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "lambda-update-privesc",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "LambdaUpdate",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:UpdateFunctionCode",
+                    "lambda:UpdateFunctionConfiguration"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "privesc-assume-chain-user",
+        "Arn": "arn:aws:iam::554433221100:user/privesc-assume-chain-user",
+        "UserId": "AIDAIVASSUMECHAIN001",
+        "CreateDate": "2025-01-05T09:30:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "assume-chain-start",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeStart",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::554433221100:role/starting-role"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "admin-target",
+        "Arn": "arn:aws:iam::554433221100:role/admin-target",
+        "RoleId": "AROAIVADMINTARGET001",
+        "CreateDate": "2025-01-05T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::554433221100:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "full-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "FullAdmin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "lambda-admin-role",
+        "Arn": "arn:aws:iam::554433221100:role/lambda-admin-role",
+        "RoleId": "AROAIVLAMBDAADMIN001",
+        "CreateDate": "2025-01-05T08:05:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "lambda-admin-full",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "FullAdmin",
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "starting-role",
+        "Arn": "arn:aws:iam::554433221100:role/starting-role",
+        "RoleId": "AROAIVSTARTINGROLE01",
+        "CreateDate": "2025-01-05T08:10:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::554433221100:user/privesc-assume-chain-user"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-to-intermediate",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeIntermediate",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::554433221100:role/intermediate-role"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "intermediate-role",
+        "Arn": "arn:aws:iam::554433221100:role/intermediate-role",
+        "RoleId": "AROAIVINTERMEDIATE01",
+        "CreateDate": "2025-01-05T08:15:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::554433221100:role/starting-role"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "chain-to-admin",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeAdmin",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::554433221100:role/admin-target"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "existing-lambda-role",
+        "Arn": "arn:aws:iam::554433221100:role/existing-lambda-role",
+        "RoleId": "AROAIVEXISTLAMBDA001",
+        "CreateDate": "2025-01-05T08:20:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "overprivileged-lambda",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "S3Full",
+                  "Effect": "Allow",
+                  "Action": "s3:*",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "IAMFull",
+                  "Effect": "Allow",
+                  "Action": "iam:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": []
+  },
+  "ec2": {
+    "instances": []
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "existing-privileged-func",
+        "FunctionArn": "arn:aws:lambda:us-east-1:554433221100:function:existing-privileged-func",
+        "Runtime": "python3.11",
+        "Role": "arn:aws:iam::554433221100:role/existing-lambda-role",
+        "Handler": "index.handler",
+        "CodeSize": 4096,
+        "Timeout": 120,
+        "MemorySize": 256,
+        "LastModified": "2025-01-05T10:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}

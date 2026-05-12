@@ -1,0 +1,201 @@
+{
+  "account_id": "334455667788",
+  "iam": {
+    "users": [
+      {
+        "UserName": "developer",
+        "Arn": "arn:aws:iam::334455667788:user/developer",
+        "UserId": "AIDADEVELOPER00000001",
+        "CreateDate": "2026-01-15T09:00:00Z",
+        "Path": "/",
+        "GroupList": ["dev-team"],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "dev-assume",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "AssumeCI",
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": "arn:aws:iam::334455667788:role/ci-runner-role"
+                },
+                {
+                  "Sid": "IAMRecon",
+                  "Effect": "Allow",
+                  "Action": ["iam:List*", "iam:Get*"],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "ci-runner-role",
+        "Arn": "arn:aws:iam::334455667788:role/ci-runner-role",
+        "RoleId": "AROACIRUNNER000000001",
+        "CreateDate": "2026-01-15T09:05:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::334455667788:user/developer"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "ci-build-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "PassRole",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "CodeBuildAccess",
+                  "Effect": "Allow",
+                  "Action": [
+                    "codebuild:CreateProject",
+                    "codebuild:StartBuild",
+                    "codebuild:BatchGetBuilds"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "LogAccess",
+                  "Effect": "Allow",
+                  "Action": ["logs:GetLogEvents", "logs:FilterLogEvents"],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "deploy-admin-role",
+        "Arn": "arn:aws:iam::334455667788:role/deploy-admin-role",
+        "RoleId": "AROADEPLOYADMIN0000001",
+        "CreateDate": "2026-01-15T09:10:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "readonly-audit-role",
+        "Arn": "arn:aws:iam::334455667788:role/readonly-audit-role",
+        "RoleId": "AROAREADONLY00000000001",
+        "CreateDate": "2026-01-15T09:15:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::334455667788:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "readonly",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "ViewOnly",
+                  "Effect": "Allow",
+                  "Action": ["iam:List*", "iam:Get*", "s3:List*"],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      }
+    ],
+    "groups": [
+      {
+        "GroupName": "dev-team",
+        "Arn": "arn:aws:iam::334455667788:group/dev-team",
+        "GroupId": "AGPADEVTEAM0000000001",
+        "GroupPolicyList": [],
+        "AttachedManagedPolicies": []
+      }
+    ],
+    "policy_docs": {
+      "arn:aws:iam::aws:policy/AdministratorAccess": {
+        "v1": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "s3": {
+    "buckets": [
+      {
+        "Name": "ci-artifacts-334455",
+        "Policy": null,
+        "PublicAccessBlock": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "ACL": null
+      }
+    ]
+  },
+  "ec2": {
+    "instances": []
+  },
+  "lambda": {
+    "functions": []
+  }
+}

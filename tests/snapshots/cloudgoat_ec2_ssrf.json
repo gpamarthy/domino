@@ -1,0 +1,230 @@
+{
+  "account_id": "223344556677",
+  "iam": {
+    "users": [
+      {
+        "UserName": "solus",
+        "Arn": "arn:aws:iam::223344556677:user/solus",
+        "UserId": "AIDASOLUS0000000001",
+        "CreateDate": "2026-02-10T08:30:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "lambda-readonly",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "LambdaRead",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:Get*",
+                    "lambda:List*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "UserName": "shepard",
+        "Arn": "arn:aws:iam::223344556677:user/shepard",
+        "UserId": "AIDASHEPARD000000001",
+        "CreateDate": "2026-02-10T08:35:00Z",
+        "Path": "/",
+        "GroupList": [],
+        "AttachedManagedPolicies": [],
+        "UserPolicyList": [
+          {
+            "PolicyName": "lambda-invoke",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "LambdaOps",
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:Get*",
+                    "lambda:Invoke*",
+                    "lambda:List*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "RoleName": "lambda-service-role",
+        "Arn": "arn:aws:iam::223344556677:role/lambda-service-role",
+        "RoleId": "AROALAMBDASVC00000001",
+        "CreateDate": "2026-02-10T08:00:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "logging-only",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "CloudWatchLogs",
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": []
+      },
+      {
+        "RoleName": "ec2-role",
+        "Arn": "arn:aws:iam::223344556677:role/ec2-role",
+        "RoleId": "AROAEC2ROLE0000000001",
+        "CreateDate": "2026-02-10T08:05:00Z",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "s3-and-monitoring",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Sid": "S3Full",
+                  "Effect": "Allow",
+                  "Action": "s3:*",
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "CloudWatchFull",
+                  "Effect": "Allow",
+                  "Action": "cloudwatch:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "InstanceProfileList": [
+          {
+            "InstanceProfileName": "ec2-profile",
+            "InstanceProfileId": "AIPAEC2PROF000000001",
+            "Arn": "arn:aws:iam::223344556677:instance-profile/ec2-profile",
+            "Path": "/",
+            "Roles": [
+              {
+                "RoleName": "ec2-role",
+                "Arn": "arn:aws:iam::223344556677:role/ec2-role"
+              }
+            ],
+            "CreateDate": "2026-02-10T08:05:00Z"
+          }
+        ]
+      }
+    ],
+    "groups": [],
+    "policy_docs": {}
+  },
+  "s3": {
+    "buckets": [
+      {
+        "Name": "secret-data-bucket",
+        "Policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "PublicRead",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": "s3:GetObject",
+              "Resource": "arn:aws:s3:::secret-data-bucket/*"
+            }
+          ]
+        },
+        "PublicAccessBlock": null,
+        "ACL": null
+      }
+    ]
+  },
+  "ec2": {
+    "instances": [
+      {
+        "InstanceId": "i-webapp01",
+        "InstanceType": "t3.medium",
+        "State": {
+          "Name": "running",
+          "Code": 16
+        },
+        "IamInstanceProfile": {
+          "Arn": "arn:aws:iam::223344556677:instance-profile/ec2-profile",
+          "Id": "AIPAEC2PROF000000001"
+        },
+        "MetadataOptions": {
+          "HttpTokens": "optional",
+          "HttpEndpoint": "enabled",
+          "HttpPutResponseHopLimit": 1
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "webapp01"
+          }
+        ]
+      }
+    ]
+  },
+  "lambda": {
+    "functions": [
+      {
+        "FunctionName": "cred-retriever",
+        "FunctionArn": "arn:aws:lambda:us-east-1:223344556677:function:cred-retriever",
+        "Runtime": "python3.11",
+        "Role": "arn:aws:iam::223344556677:role/lambda-service-role",
+        "Handler": "index.handler",
+        "CodeSize": 1024,
+        "Timeout": 60,
+        "MemorySize": 128,
+        "LastModified": "2026-02-10T09:00:00.000+0000",
+        "S3Triggers": [],
+        "EventSourceMappings": []
+      }
+    ]
+  }
+}
