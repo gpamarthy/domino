@@ -63,7 +63,10 @@ def main():
         p.print_help()
         sys.exit(1)
 
-    log.info("building_graph", nodes=len(data.get("iam", {}).get("users", [])) + len(data.get("iam", {}).get("roles", [])))
+    log.info(
+        "building_graph",
+        nodes=len(data.get("iam", {}).get("users", [])) + len(data.get("iam", {}).get("roles", [])),
+    )
     g = build_graph(data)
 
     start = args.start_principal
@@ -81,7 +84,7 @@ def main():
 
     log.info("finding_exploit_chains", start=start, max_depth=args.max_depth)
     chains = find_chains(g, start, max_depth=args.max_depth)
-    
+
     if snapshot_id:
         db.save_scan(snapshot_id, start, chains)
 
