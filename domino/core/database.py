@@ -56,7 +56,7 @@ class DominoDB:
             )
             return cursor.lastrowid
 
-    def get_latest_snapshot(self, profile=None):
+    def get_latest_snapshot(self):
         query = "SELECT * FROM snapshots ORDER BY timestamp DESC LIMIT 1"
         cursor = self.conn.execute(query)
         row = cursor.fetchone()
