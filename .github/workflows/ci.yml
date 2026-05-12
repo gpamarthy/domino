@@ -76,6 +76,9 @@ jobs:
           path: ~/.cache/pip
           key: security-pip-${{ hashFiles('pyproject.toml') }}
           restore-keys: security-pip-
+      - run: pip install --upgrade pip
       - run: pip install -e ".[dev]"
       - run: bandit -r domino/ -q
-      - run: pip-audit
+      # ignore pip-itself CVEs (CVE-2026-3219 has no fix; CVE-2026-6357 fixed in pip 26.1
+      # but the runner image lags); audit project deps, not the build tool
+      - run: pip-audit --ignore-vuln CVE-2026-3219 --ignore-vuln CVE-2026-6357
