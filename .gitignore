@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 .coverage
 .venv/
+.venv-test/
+.geminiignore
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
