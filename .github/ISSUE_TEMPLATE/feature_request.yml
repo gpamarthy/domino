@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest a new edge, recon module, or capability
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve
+      description: Describe the AWS escalation pattern or workflow that isn't covered today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: One or two paragraphs. Not a full design.
+    validations:
+      required: true
+
+  - type: input
+    id: edge-or-module
+    attributes:
+      label: Edge or recon module
+      placeholder: 'edge: iam:PassRole -> ecs:RegisterTaskDefinition / recon: ECR repos'
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else you tried or thought about.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This isn't a request to remediate findings - domino stays read-only
+        - label: This isn't a request to scan non-AWS cloud (Azure, GCP) - separate tools for those

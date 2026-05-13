@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussion / question
+    url: https://github.com/gpamarthy/domino/discussions
+    about: Ask questions, share snapshots, propose ideas
+  - name: Security report
+    url: https://github.com/gpamarthy/domino/blob/main/SECURITY.md
+    about: Do not file security issues publicly - see SECURITY.md

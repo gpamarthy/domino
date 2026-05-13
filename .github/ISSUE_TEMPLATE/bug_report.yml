@@ -1,0 +1,70 @@
+name: Bug report
+description: Something doesn't work the way it should
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A short description of the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Commands you ran, in order. Use `--demo` if reproducible against the bundled snapshot.
+      placeholder: |
+        domino --demo --json-out
+        domino --profile myprofile --target arn:aws:iam::123:role/foo
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What chain or output you expected vs what you saw.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: domino version
+      placeholder: '0.1.0'
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: '3.11.7 / 3.12.2'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope of the bug
+      options:
+        - Recon (boto3 calls, snapshot capture)
+        - Graph builder (edges, paths)
+        - Chain finder (find_chains, ranking)
+        - CLI / output rendering
+        - Demo mode
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I've searched existing issues
+          required: true
+        - label: I'm running domino against an account I have authorization to test
+          required: true
